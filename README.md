@@ -29,15 +29,16 @@ pnpm dev
 5. **Mỗi trang con hoạt động độc lập** — không sửa file dùng chung ngoài `router/index.ts` và `HomePage.vue`
 6. **Responsive** — trang phải hiển thị tốt trên mobile
 7. **Không thêm dependency mới** trừ khi thật sự cần và được approve
-8. **Ghi rõ tên tác giả** trong mảng `pages` ở `HomePage.vue`
+8. **Ghi rõ tên tác giả** trong mảng `pages` ở `src/data/pages.ts`
 
 ## Cách tham gia
 
 1. Fork repo và clone về máy
-2. Tạo thư mục mới trong `src/views/<tên-trang>/` với file `index.vue`
-3. Thêm route trong `src/router/index.ts`
-4. Thêm link trang của bạn vào mảng `pages` trong `src/views/HomePage.vue`
-5. Tạo Pull Request và chờ merge!
+2. Tạo branch mới từ `main` (ví dụ: `git checkout -b feat/tên-trang`)
+3. Tạo thư mục mới trong `src/views/<tên-trang>/` với file `index.vue`
+4. Thêm route trong `src/router/index.ts`
+5. Thêm link trang của bạn vào mảng `pages` trong `src/data/pages.ts`
+6. Tạo Pull Request và chờ merge!
 
 Xem trang mẫu: [`src/views/hello-world/index.vue`](src/views/hello-world/index.vue)
 
@@ -47,6 +48,7 @@ Xem hướng dẫn thiết kế: [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md
 
 ```
 src/
+  data/pages.ts                  # Danh sách trang (thêm trang mới ở đây)
   views/
     HomePage.vue                 # Trang chủ (launcher)
     hello-world/index.vue        # Trang mẫu

@@ -27,7 +27,7 @@ pnpm dev
 
 1. Tạo thư mục `src/views/<tên-trang-của-bạn>/` với file `index.vue`
 2. Thêm route trong `src/router/index.ts`
-3. Thêm link vào mảng `pages` trong `src/views/HomePage.vue`
+3. Thêm link vào mảng `pages` trong `src/data/pages.ts`
 4. Xem trang mẫu: `src/views/hello-world/index.vue`
 
 ## Quy tắc code
