@@ -69,7 +69,7 @@ function padIndex(i: number): string {
           <a
             href="https://www.facebook.com/groups/j2team.community/"
             target="_blank"
-            rel="noopener"
+            rel="noopener nofollow"
             class="text-accent-coral link-underline"
           >
             J2TEAM Community
@@ -144,7 +144,7 @@ function padIndex(i: number): string {
           :key="tech.name"
           :href="tech.url"
           target="_blank"
-          rel="noopener"
+          rel="noopener nofollow"
           class="group flex items-center gap-4 border border-border-default bg-bg-surface p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent-amber hover:bg-bg-elevated hover:shadow-lg hover:shadow-accent-amber/5"
         >
           <div>
@@ -200,7 +200,7 @@ function padIndex(i: number): string {
         <a
           href="https://www.facebook.com/groups/j2team.community/"
           target="_blank"
-          rel="noopener"
+          rel="noopener nofollow"
           class="text-text-primary link-underline"
         >
           J2TEAM Community
