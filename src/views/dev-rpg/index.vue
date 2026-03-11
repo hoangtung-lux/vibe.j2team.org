@@ -479,7 +479,7 @@ function generateCard() {
 function shareCard() {
   if (!card.value) return
   const c = card.value
-  const text = `⚔️ DEV RPG — J2TEAM Vibe\n${'━'.repeat(20)}\n👤 ${c.name} [${c.rarity.label}]\n${c.cls.emoji} Class: ${c.cls.name} | Lv.${c.level}\n🏆 ${c.title}\nHP: ${c.hp} | MP: ${c.mp}\n${'━'.repeat(20)}\n💡 ${c.skills.join(' | ')}\n⚠ ${c.passive}\n${'━'.repeat(20)}\n🎮 vibe.j2team.org/Dev-RPG`
+  const text = `⚔️ DEV RPG — J2TEAM Vibe\n${'━'.repeat(20)}\n👤 ${c.name} [${c.rarity.label}]\n${c.cls.emoji} Class: ${c.cls.name} | Lv.${c.level}\n🏆 ${c.title}\nHP: ${c.hp} | MP: ${c.mp}\n${'━'.repeat(20)}\n💡 ${c.skills.join(' | ')}\n⚠ ${c.passive}\n${'━'.repeat(20)}\n🎮 vibe.j2team.org/dev-rpg`
   navigator.clipboard.writeText(text).then(() => {
     copied.value = true
     setTimeout(() => {

@@ -144,12 +144,12 @@
 <script setup lang="ts">
 import { computed, ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useGameStore } from '../The-Form-Game/store'
+import { useGameStore } from '../the-form-game/store'
 
-import ChallengeReaction from '../The-Form-Game/challenges/ChallengeReaction.vue'
-import ChallengeTyping from '../The-Form-Game/challenges/ChallengeTyping.vue'
-import ChallengeTiming from '../The-Form-Game/challenges/ChallengeTiming.vue'
-import ChallengeMouse from '../The-Form-Game/challenges/ChallengeMouse.vue'
+import ChallengeReaction from '../the-form-game/challenges/ChallengeReaction.vue'
+import ChallengeTyping from '../the-form-game/challenges/ChallengeTyping.vue'
+import ChallengeTiming from '../the-form-game/challenges/ChallengeTiming.vue'
+import ChallengeMouse from '../the-form-game/challenges/ChallengeMouse.vue'
 
 const store = useGameStore()
 const router = useRouter()
@@ -187,7 +187,7 @@ const handlePass = () => {
 onMounted(() => {
   // If user accesses directly without having triggered captcha from the form game:
   if (!store.captchaRequested) {
-    router.push('/The-Form-Game')
+    router.push('/the-form-game')
   }
 })
 </script>

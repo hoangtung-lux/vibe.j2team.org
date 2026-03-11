@@ -154,7 +154,8 @@ Before implementing any new feature or sub-page, agents MUST:
    The following are **pre-approved** and can be added without additional approval:
    - `vue-konva` — 2D canvas library for drawing, games, and interactive graphics
    - `shiki` — Syntax highlighter
-8. **Author attribution required** — every page must have an `author` field in its `meta.ts` file
+8. **Folder names must be kebab-case** — sub-page directories under `src/views/` must use lowercase kebab-case (e.g., `my-app`, `dev-rpg`). PascalCase or mixed-case folder names are not allowed
+9. **Author attribution required** — every page must have an `author` field in its `meta.ts` file
 9. **No landing pages or promotional content** — Pages must provide direct, self-contained value to users (e.g., a game, tool, interactive experience, or educational content). The following are **not accepted**:
    - Landing pages or showcase pages for external products, services, or brands
    - Pages whose primary purpose is to redirect users to external websites or services

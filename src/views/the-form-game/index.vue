@@ -318,7 +318,7 @@ const router = useRouter()
 
 const handleCaptchaTrigger = () => {
   store.triggerCaptcha()
-  router.push('/Human-Verification')
+  router.push('/human-verification')
 }
 
 // For animations
