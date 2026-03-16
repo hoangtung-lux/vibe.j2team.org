@@ -40,8 +40,8 @@ let observer: IntersectionObserver | undefined
 function setupObserver() {
   if (!sectionRef.value) return
   observer = new IntersectionObserver(
-    ([entry]) => {
-      inView.value = entry.isIntersecting
+    (entries) => {
+      if (entries[0]) inView.value = entries[0].isIntersecting
     },
     { threshold: 0 },
   )
