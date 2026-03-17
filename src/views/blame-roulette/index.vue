@@ -170,6 +170,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useIntervalFn } from '@vueuse/core'
 import { blames, type BlameItem } from './data/blames'
 
 // State
@@ -180,20 +181,13 @@ const sirenState = ref(false)
 
 const getRandomItem = () => blames[Math.floor(Math.random() * blames.length)]!
 
-// Logic Quay
-const fireBlame = () => {
-  if (isSpinning.value) return
+const TOTAL_DURATION = 3500 // Quay trong 3.5s
+const FLASH_INTERVAL = 60 // Tốc độ giật nhấp nháy cực nhanh chữ
 
-  isSpinning.value = true
-  hasResult.value = false
-  sirenState.value = true // Kích hoạt còi báo động nhấp nháy nền
+let elapsed = 0
 
-  const TOTAL_DURATION = 3500 // Quay trong 3.5s
-  const FLASH_INTERVAL = 60 // Tốc độ giật nhấp nháy cực nhanh chữ
-
-  let elapsed = 0
-
-  const intervalId = setInterval(() => {
+const { pause, resume } = useIntervalFn(
+  () => {
     elapsed += FLASH_INTERVAL
 
     if (elapsed < TOTAL_DURATION - 800) {
@@ -201,7 +195,7 @@ const fireBlame = () => {
       currentDisplay.value = getRandomItem()
     } else if (elapsed > TOTAL_DURATION) {
       // Kết thúc
-      clearInterval(intervalId)
+      pause()
 
       // Chọn ra kết quả cuối
       currentDisplay.value = getRandomItem()
@@ -210,7 +204,21 @@ const fireBlame = () => {
       hasResult.value = true
       sirenState.value = false // Tắt còi
     }
-  }, FLASH_INTERVAL)
+  },
+  FLASH_INTERVAL,
+  { immediate: false },
+)
+
+// Logic Quay
+const fireBlame = () => {
+  if (isSpinning.value) return
+
+  isSpinning.value = true
+  hasResult.value = false
+  sirenState.value = true // Kích hoạt còi báo động nhấp nháy nền
+  elapsed = 0
+
+  resume()
 }
 </script>
 
