@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import { multiAppAuthors, toAuthorSlug } from '@/data/authors'
+import { getMultiAppAuthors, toAuthorSlug } from '@/data/authors'
 import { getCategoryLabel } from '@/data/categories'
 import AuthorAvatar from '@/components/AuthorAvatar.vue'
 
@@ -41,7 +41,7 @@ const defaultStyle: RankStyle = {
   hover: 'hover:text-accent-coral',
 }
 
-const styledAuthors = multiAppAuthors.map((stat) => ({
+const styledAuthors = getMultiAppAuthors().map((stat) => ({
   stat,
   style: rankStyles[stat.rank] ?? defaultStyle,
 }))
