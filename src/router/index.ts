@@ -20,6 +20,7 @@ const ContentPolicy = () => import('@/views/ContentPolicy.vue')
 const LeaderboardPage = () => import('@/views/LeaderboardPage.vue')
 const BookmarksPage = () => import('@/views/BookmarksPage.vue')
 const AuthorPage = () => import('@/views/AuthorPage.vue')
+const MembersPage = () => import('@/views/MembersPage.vue')
 const NotFound = () => import('@/views/NotFound.vue')
 
 function buildPageRoutes(pages: PageInfo[]): RouteRecordRaw[] {
@@ -82,6 +83,15 @@ const router = createRouter({
       meta: {
         title: 'Yêu thích - vibe.j2team.org',
         description: 'Danh sách các ứng dụng yêu thích của bạn.',
+      },
+    },
+    {
+      path: '/members',
+      name: 'members',
+      component: MembersPage,
+      meta: {
+        title: 'Thành viên - vibe.j2team.org',
+        description: 'Danh sách tất cả thành viên đóng góp trên vibe.j2team.org.',
       },
     },
     {

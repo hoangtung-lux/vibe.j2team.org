@@ -88,7 +88,9 @@ const categoryBreakdown = computed(() => (author.value ? getCategoryBreakdown(au
 
       <!-- Author profile -->
       <template v-else>
-        <AppBreadcrumb :items="[{ label: 'Thành viên' }, { label: author.author }]" />
+        <AppBreadcrumb
+          :items="[{ label: 'Thành viên', to: '/members' }, { label: author.author }]"
+        />
 
         <!-- Header -->
         <div class="mt-8 flex flex-wrap items-start gap-4">
