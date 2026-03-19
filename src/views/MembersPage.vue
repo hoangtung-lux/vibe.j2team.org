@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, useTemplateRef } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useHead, useSeoMeta } from '@unhead/vue'
 import { Icon } from '@iconify/vue'
 import { getAllAuthors, toAuthorSlug } from '@/data/authors'
 import { getCategoryLabel } from '@/data/categories'
+import { useSearchShortcut } from '@/composables/useSearchShortcut'
+import { normalize } from '@/utils/text'
 import AppBreadcrumb from '@/components/AppBreadcrumb.vue'
 import AuthorAvatar from '@/components/AuthorAvatar.vue'
 
@@ -16,6 +18,8 @@ useSeoMeta({
 })
 
 const search = ref('')
+const searchInputRef = useTemplateRef<HTMLInputElement>('searchInput')
+useSearchShortcut(searchInputRef)
 
 type SortMode = 'apps' | 'name'
 const sortBy = ref<SortMode>('apps')
@@ -43,9 +47,9 @@ const sortIcons: Record<SortMode, [string, string]> = {
 const allMembers = computed(() => Array.from(getAllAuthors().values()))
 
 const filteredMembers = computed(() => {
-  const q = search.value.trim().toLowerCase()
+  const q = normalize(search.value.trim())
   const list = q
-    ? allMembers.value.filter((m) => m.author.toLowerCase().includes(q))
+    ? allMembers.value.filter((m) => normalize(m.author).includes(q))
     : [...allMembers.value]
   const dir = sortAsc.value ? -1 : 1
 
@@ -86,11 +90,17 @@ const filteredMembers = computed(() => {
             class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-dim"
           />
           <input
+            ref="searchInput"
             v-model="search"
-            type="text"
+            type="search"
             placeholder="Tìm thành viên..."
-            class="w-full sm:w-80 pl-10 pr-4 py-2.5 bg-bg-surface border border-border-default text-text-primary text-sm font-display tracking-wide placeholder:text-text-dim focus:outline-none focus:border-accent-coral transition-colors"
+            class="w-full sm:w-80 pl-10 pr-12 py-2.5 bg-bg-surface border border-border-default text-text-primary text-sm font-display tracking-wide placeholder:text-text-dim focus:outline-none focus:border-accent-coral transition-colors"
           />
+          <kbd
+            class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 text-[10px] font-mono text-text-dim border border-border-default rounded bg-bg-elevated"
+          >
+            /
+          </kbd>
         </div>
 
         <div class="flex gap-1">
