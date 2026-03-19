@@ -2,11 +2,10 @@
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useHead, useSeoMeta } from '@unhead/vue'
-import { refDebounced } from '@vueuse/core'
 import { Icon } from '@iconify/vue'
 import { categories } from '@/data/categories'
 import { usePagesStore } from '@/stores/usePagesStore'
-import { normalize } from '@/utils/text'
+import { useFilteredList } from '@/composables/useFilteredList'
 import { useSearchShortcut } from '@/composables/useSearchShortcut'
 import AppBreadcrumb from '@/components/AppBreadcrumb.vue'
 import PageCard from '@/components/PageCard.vue'
@@ -39,31 +38,18 @@ useSeoMeta({
   ogDescription: pageDescription,
 })
 
-// Search
-const searchQuery = ref('')
-const debouncedQuery = refDebounced(searchQuery, 300)
-const searchInputRef = ref<HTMLInputElement | null>(null)
-useSearchShortcut(searchInputRef)
-
-// Pages in this category with pre-normalized fields for search
+// Pages in this category
 const categoryPages = computed(() =>
-  pagesStore.pages
-    .filter((p) => p.category === categoryId.value)
-    .map((p) => ({
-      ...p,
-      _name: normalize(p.name),
-      _desc: normalize(p.description),
-      _author: normalize(p.author),
-    })),
+  pagesStore.pages.filter((p) => p.category === categoryId.value),
 )
 
-const filteredPages = computed(() => {
-  const query = normalize(debouncedQuery.value.trim())
-  if (!query) return categoryPages.value
-  return categoryPages.value.filter(
-    (p) => p._name.includes(query) || p._desc.includes(query) || p._author.includes(query),
-  )
+// Search
+const { searchQuery, filteredList: filteredPages } = useFilteredList({
+  items: categoryPages,
+  searchFields: ['name', 'description', 'author'],
 })
+const searchInputRef = ref<HTMLInputElement | null>(null)
+useSearchShortcut(searchInputRef)
 </script>
 
 <template>
